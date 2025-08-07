@@ -58,7 +58,9 @@ class DosenController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        // tampilan edit
+        $dosen = Dosen::find($id);
+        return view('dosen.edit',compact('dosen'));
     }
 
     /**
@@ -66,7 +68,16 @@ class DosenController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // tampilan update
+        $dosen = Dosen::find($id);
+        $dosen->nidn = $request->nidn;
+        $dosen->nama = $request->nama;
+        $dosen->email = $request->email;
+        $dosen->rumpun = $request->rumpun;
+        $dosen->alamat = $request->alamat;
+        $dosen->save();
+
+        return redirect('/dosen');
     }
 
     /**
@@ -74,6 +85,10 @@ class DosenController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        //proses menghapus
+        $dosen = Dosen::find($id);
+        $dosen->delete();
+
+        return redirect('/dosen');
     }
 }
